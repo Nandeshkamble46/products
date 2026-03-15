@@ -1,9 +1,5 @@
-type Product = {
-    id: number
-    title: string
-    price: number
-    image: string
-}
+import { type Product } from "../types/product"
+import { Link } from "react-router-dom"
 
 type Props = {
     product: Product
@@ -11,21 +7,28 @@ type Props = {
 
 function ProductCard({ product }: Props) {
     return (
-        <div className="border rounded-xl p-4 shadow hover:shadow-lg transition">
-            <img
-                src={product.image}
-                alt={product.title}
-                className="h-40 mx-auto object-contain"
-            />
+        <Link to={`/product/${product.id}`}>
+            <div className="border rounded-xl p-4 shadow hover:shadow-xl transition">
 
-            <h2 className="mt-4 font-semibold line-clamp-2">
-                {product.title}
-            </h2>
+                <img
+                    src={product.image}
+                    className="h-40 mx-auto object-contain"
+                />
 
-            <p className="text-green-600 font-bold mt-2">
-                ${product.price}
-            </p>
-        </div>
+                <h2 className="mt-3 font-semibold line-clamp-2">
+                    {product.title}
+                </h2>
+
+                <p className="text-green-600 font-bold mt-2">
+                    ${product.price}
+                </p>
+
+                <p className="text-yellow-500 text-sm">
+                    ⭐ {product.rating.rate}
+                </p>
+
+            </div>
+        </Link>
     )
 }
 
