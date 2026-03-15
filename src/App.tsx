@@ -9,9 +9,31 @@ type Product = {
 }
 
 function App() {
+
+  const [products, setProducts] = useState<Product[]>([])
+
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then(res => res.json())
+      .then(data => setProducts(data))
+  }, [])
+
   return (
-    <div className="text-center text-3xl font-bold mt-20">
-      FakeStore Product Page
+
+    <div className="p-8">
+
+      <h1 className="text-3xl font-bold mb-6 text-center">
+        FakeStore Products
+      </h1>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+        {products.map(product => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+
+      </div>
+
     </div>
   )
 }
