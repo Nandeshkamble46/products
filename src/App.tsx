@@ -1,40 +1,23 @@
-import { useEffect, useState } from "react"
-import ProductCard from "./components/ProductCard"
-
-type Product = {
-  id: number
-  title: string
-  price: number
-  image: string
-}
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Navbar from "./components/Navbar"
+import Home from "./pages/Home"
+import ProductDetails from "./pages/ProductDetails"
 
 function App() {
 
-  const [products, setProducts] = useState<Product[]>([])
-
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then(res => res.json())
-      .then(data => setProducts(data))
-  }, [])
-
   return (
+    <BrowserRouter>
 
-    <div className="p-8">
+      <Navbar />
 
-      <h1 className="text-3xl font-bold mb-6 text-center">
-        FakeStore Products
-      </h1>
+      <Routes>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
 
-        {products.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+      </Routes>
 
-      </div>
-
-    </div>
+    </BrowserRouter>
   )
 }
 

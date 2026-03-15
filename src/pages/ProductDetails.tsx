@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { Product } from "../types/product"
+import type { Product } from "../types/product"
 
 function ProductDetails() {
 
